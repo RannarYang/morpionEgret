@@ -22,7 +22,7 @@ class ButtonViewManage extends egret.EventDispatcher{
 		for(let i = 0; i < len; i++) {
 			let btn = this._buttonArr[i];
 			btn.x = 24 + (24 + btn.width) * i;
-            btn.y = 640;
+            btn.y = 630;
 		}
 	}
 	private initUndoProp() {

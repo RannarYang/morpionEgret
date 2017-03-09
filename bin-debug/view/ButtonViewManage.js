@@ -25,7 +25,7 @@ var ButtonViewManage = (function (_super) {
         for (var i = 0; i < len; i++) {
             var btn = this._buttonArr[i];
             btn.x = 24 + (24 + btn.width) * i;
-            btn.y = 640;
+            btn.y = 630;
         }
     };
     ButtonViewManage.prototype.initUndoProp = function () {

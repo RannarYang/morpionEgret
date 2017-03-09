@@ -18,7 +18,7 @@ var ChessBoard = (function (_super) {
         var myShape = new egret.Shape();
         myShape.y = 30;
         myShape.graphics.beginFill(0xd86525, 1);
-        myShape.graphics.drawRect(0, 0, GameData.stageW, GameData.stageW);
+        myShape.graphics.drawRect(0, 0, GameData.stageW, GameData.stageH);
         myShape.graphics.endFill();
         myShape.graphics.lineStyle(2, 0xBFBFBF, 1);
         for (var i = 0; i < 15; i++) {
