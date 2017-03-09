@@ -1,0 +1,104 @@
+{
+	"groups": [
+		{
+			"keys": "background_png,levelConfig_json,undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,numberdisable_fnt,number_fnt",
+			"name": "game"
+		},
+		{
+			"keys": "undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,numberdisable_png,number2_fnt,number_png,numberdisable2_fnt",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "background_png",
+			"type": "image",
+			"url": "assets/background.png"
+		},
+		{
+			"name": "levelConfig_json",
+			"type": "json",
+			"url": "res/levelConfig.json"
+		},
+		{
+			"name": "undo_png",
+			"type": "image",
+			"url": "assets/undo.png"
+		},
+		{
+			"name": "tips_png",
+			"type": "image",
+			"url": "assets/tips.png"
+		},
+		{
+			"name": "replay_png",
+			"type": "image",
+			"url": "assets/replay.png"
+		},
+		{
+			"name": "level_png",
+			"type": "image",
+			"url": "assets/level.png"
+		},
+		{
+			"name": "undo_disabled_png",
+			"type": "image",
+			"url": "assets/undo_disabled.png"
+		},
+		{
+			"name": "tips_disabled_png",
+			"type": "image",
+			"url": "assets/tips_disabled.png"
+		},
+		{
+			"name": "primary_png",
+			"type": "image",
+			"url": "assets/primary.png"
+		},
+		{
+			"name": "middle_png",
+			"type": "image",
+			"url": "assets/middle.png"
+		},
+		{
+			"name": "advanced_png",
+			"type": "image",
+			"url": "assets/advanced.png"
+		},
+		{
+			"name": "buttonConfig_json",
+			"type": "json",
+			"url": "res/buttonConfig.json"
+		},
+		{
+			"name": "numberdisable_fnt",
+			"type": "font",
+			"url": "assets/numberdisable.fnt"
+		},
+		{
+			"name": "number_fnt",
+			"type": "font",
+			"url": "assets/number.fnt"
+		},
+		{
+			"name": "numberdisable_png",
+			"type": "image",
+			"url": "assets/numberdisable.png"
+		},
+		{
+			"name": "number2_fnt",
+			"type": "font",
+			"url": "assets/number.fnt"
+		},
+		{
+			"name": "number_png",
+			"type": "image",
+			"url": "assets/number.png"
+		},
+		{
+			"name": "numberdisable2_fnt",
+			"type": "font",
+			"url": "assets/numberdisable.fnt"
+		}
+	]
+}

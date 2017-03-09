@@ -1,0 +1,20 @@
+{
+		"primary" : {
+			"AI" : "AI1",
+			"undoNum" : -1,
+			"hintNum" : -1
+		},
+
+		"middle" : {
+			"AI" : "AI2",
+			"undoNum" : 3,
+			"hintNum" : 3
+		},
+
+		"advanced" : {
+			"AI" : "AI2",
+			"undoNum" : 0,
+			"hintNum" : 0
+		}
+
+}
