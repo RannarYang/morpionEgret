@@ -10,8 +10,8 @@ var GameLogic = (function () {
     }
     GameLogic.prototype.init = function () {
         GameData.initData(); // 初始化数据
-        var levelConfigData = RES.getRes("levelConfig_json");
-        LevelGameDataParse.parseLevelGameData(levelConfigData.middle);
+        var levelConfigData = this._levelConfigData = RES.getRes("levelConfig_json");
+        LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary);
         // 加入棋盘
         var cbc = new egret.Sprite();
         var chessboard = new ChessBoard(cbc);
@@ -23,10 +23,18 @@ var GameLogic = (function () {
         var bvmc = new egret.Sprite();
         this._gameStage.addChild(bvmc);
         this.bvm = new ButtonViewManage(bvmc);
+        // 加入关卡选择
+        var levelc = new egret.Sprite();
+        this._gameStage.addChild(levelc);
+        this.lvm = new LevelViewManage(levelc);
         chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_REPLAY, this.tap_replay, this);
+        this.bvm.addEventListener(ButtonViewManageEvent.TAP_LEVEL, this.tap_level, this);
+        this.lvm.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
+        this.lvm.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
+        this.lvm.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
     };
     GameLogic.prototype.move_pawn = function (evt) {
         if (this._isOver)
@@ -57,6 +65,21 @@ var GameLogic = (function () {
     GameLogic.prototype.tap_replay = function () {
         GameData.initData();
         this._chessView.init();
+    };
+    GameLogic.prototype.tap_level = function () {
+        this.lvm.show();
+    };
+    GameLogic.prototype.tap_primary = function () {
+        LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary);
+        this.tap_replay();
+    };
+    GameLogic.prototype.tap_middle = function () {
+        LevelGameDataParse.parseLevelGameData(this._levelConfigData.middle);
+        this.tap_replay();
+    };
+    GameLogic.prototype.tap_advanced = function () {
+        LevelGameDataParse.parseLevelGameData(this._levelConfigData.advanced);
+        this.tap_replay();
     };
     return GameLogic;
 }());

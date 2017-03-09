@@ -1,8 +1,10 @@
 class GameLogic {
 	private _gameStage: egret.Sprite;
 	private bvm: ButtonViewManage;
+	private lvm: LevelViewManage;
 	private _chessView: ChessView;
 
+	private _levelConfigData: any;
 	private _me = true;
 	private _isOver: boolean = false;
 	public constructor(gameStage: egret.Sprite) {
@@ -13,9 +15,8 @@ class GameLogic {
 	private init() {
 		GameData.initData(); // 初始化数据
 
-		let levelConfigData = RES.getRes("levelConfig_json");
-		LevelGameDataParse.parseLevelGameData(levelConfigData.middle);
-
+		let levelConfigData = this._levelConfigData = RES.getRes("levelConfig_json");
+		LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary); // 默认是初级的
 		// 加入棋盘
 		let cbc: egret.Sprite = new egret.Sprite();
 		let chessboard: ChessBoard = new ChessBoard(cbc);
@@ -30,10 +31,20 @@ class GameLogic {
 		this._gameStage.addChild(bvmc);
 		this.bvm = new ButtonViewManage(bvmc);
 
+		// 加入关卡选择
+		let levelc: egret.Sprite = new egret.Sprite();
+		this._gameStage.addChild(levelc);
+		this.lvm = new LevelViewManage(levelc);
+
 		chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_REPLAY, this.tap_replay, this);
+		this.bvm.addEventListener(ButtonViewManageEvent.TAP_LEVEL, this.tap_level, this);
+
+		this.lvm.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
+		this.lvm.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
+		this.lvm.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
 	}
 
 	private move_pawn(evt) {
@@ -68,5 +79,21 @@ class GameLogic {
 	private tap_replay() {
 		GameData.initData();
 		this._chessView.init();
+	}
+
+	private tap_level() {
+		this.lvm.show();
+	}
+	private tap_primary() {
+		LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary);
+		this.tap_replay();
+	}
+	private tap_middle() {
+		LevelGameDataParse.parseLevelGameData(this._levelConfigData.middle);
+		this.tap_replay();
+	}
+	private tap_advanced() {
+		LevelGameDataParse.parseLevelGameData(this._levelConfigData.advanced);
+		this.tap_replay();
 	}
 }
