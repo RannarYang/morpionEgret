@@ -16,6 +16,7 @@ var game_file_list = [
 	"bin-debug/data/LevelGameDataParse.js",
 	"bin-debug/event/ButtonViewManageEvent.js",
 	"bin-debug/event/ChessBoardEvent.js",
+	"bin-debug/event/GameEndViewEvent.js",
 	"bin-debug/data/command/ComputerMovePawnCommand.js",
 	"bin-debug/GameLogic.js",
 	"bin-debug/Main.js",
@@ -23,6 +24,7 @@ var game_file_list = [
 	"bin-debug/view/ButtonViewManage.js",
 	"bin-debug/view/ChessBoard.js",
 	"bin-debug/view/ChessView.js",
+	"bin-debug/view/GameEndView.js",
 	"bin-debug/view/LevelViewManage.js",
 	"bin-debug/event/LevelViewManageEvent.js",
 	//----auto game_file_list end----

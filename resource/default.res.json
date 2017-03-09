@@ -1,11 +1,11 @@
 {
 	"groups":[
 		{
-			"keys":"background_png,levelConfig_json,undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,numberdisable_fnt,number_fnt,close_png",
+			"keys":"background_png,levelConfig_json,undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,numberdisable_fnt,number_fnt,close_png,gameover_png,youwin_png,sure_png",
 			"name":"game"
 		},
 		{
-			"keys":"undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,close_png",
+			"keys":"undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,close_png,sure_png",
 			"name":"preload"
 		}
 	],
@@ -84,6 +84,21 @@
 			"name":"close_png",
 			"type":"image",
 			"url":"assets/close.png"
+		},
+		{
+			"name":"gameover_png",
+			"type":"image",
+			"url":"assets/gameover.png"
+		},
+		{
+			"name":"youwin_png",
+			"type":"image",
+			"url":"assets/youwin.png"
+		},
+		{
+			"name":"sure_png",
+			"type":"image",
+			"url":"assets/sure.png"
 		}
 	]
 }

@@ -25,7 +25,6 @@ var ComputerMovePawnCommand = (function (_super) {
                 GameData.computerWin[k]++;
                 GameData.myWin[k] += 6;
                 if (GameData.computerWin[k] == 5) {
-                    window.alert("计算机赢了");
                     _isOver = true;
                 }
             }

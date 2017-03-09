@@ -11,7 +11,7 @@ var GameLogic = (function () {
     GameLogic.prototype.init = function () {
         GameData.initData(); // 初始化数据
         var levelConfigData = this._levelConfigData = RES.getRes("levelConfig_json");
-        LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary);
+        LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary); // 默认是初级的
         // 加入棋盘
         var cbc = new egret.Sprite();
         var chessboard = new ChessBoard(cbc);
@@ -27,6 +27,10 @@ var GameLogic = (function () {
         var levelc = new egret.Sprite();
         this._gameStage.addChild(levelc);
         this.lvm = new LevelViewManage(levelc);
+        this.lvm.hide();
+        var endv = new egret.Sprite();
+        this._gameStage.addChild(endv);
+        this.gev = new GameEndView(endv);
         chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
@@ -35,6 +39,11 @@ var GameLogic = (function () {
         this.lvm.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
         this.lvm.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
         this.lvm.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
+        this.gev.addEventListener(GameEndViewEvent.TAP_SURE, this.tap_sure, this);
+    };
+    GameLogic.prototype.initData = function () {
+        this._me = true;
+        this._isOver = false;
     };
     GameLogic.prototype.move_pawn = function (evt) {
         if (this._isOver)
@@ -45,11 +54,19 @@ var GameLogic = (function () {
         var userMoveCommand = new UserMovePawnCommand(numX, numY, this._me, this._chessView);
         GameData.movePawnCommands.push(userMoveCommand);
         this._isOver = userMoveCommand.execute();
+        if (this._isOver) {
+            // GameEnd 
+            this.gev.show(true);
+        }
         if (!this._isOver) {
             this._me = !this._me;
             var computerMoveCommand = new ComputerMovePawnCommand(this._chessView);
             GameData.movePawnCommands.push(computerMoveCommand);
             this._isOver = computerMoveCommand.execute();
+            if (this._isOver) {
+                // GameEnd 
+                this.gev.show(false);
+            }
         }
     };
     GameLogic.prototype.tap_undo = function (evt) {
@@ -64,6 +81,7 @@ var GameLogic = (function () {
     };
     GameLogic.prototype.tap_replay = function () {
         GameData.initData();
+        this.initData();
         this._chessView.init();
     };
     GameLogic.prototype.tap_level = function () {
@@ -79,6 +97,9 @@ var GameLogic = (function () {
     };
     GameLogic.prototype.tap_advanced = function () {
         LevelGameDataParse.parseLevelGameData(this._levelConfigData.advanced);
+        this.tap_replay();
+    };
+    GameLogic.prototype.tap_sure = function () {
         this.tap_replay();
     };
     return GameLogic;

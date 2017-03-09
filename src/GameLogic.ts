@@ -2,6 +2,7 @@ class GameLogic {
 	private _gameStage: egret.Sprite;
 	private bvm: ButtonViewManage;
 	private lvm: LevelViewManage;
+	private gev: GameEndView;
 	private _chessView: ChessView;
 
 	private _levelConfigData: any;
@@ -35,6 +36,11 @@ class GameLogic {
 		let levelc: egret.Sprite = new egret.Sprite();
 		this._gameStage.addChild(levelc);
 		this.lvm = new LevelViewManage(levelc);
+		this.lvm.hide();
+
+		let endv: egret.Sprite = new egret.Sprite();
+		this._gameStage.addChild(endv);
+		this.gev = new GameEndView(endv);
 
 		chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
@@ -45,8 +51,13 @@ class GameLogic {
 		this.lvm.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
 		this.lvm.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
 		this.lvm.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
-	}
 
+		this.gev.addEventListener(GameEndViewEvent.TAP_SURE, this.tap_sure, this);
+	}
+	private initData() {
+		this._me = true;
+		this._isOver = false;
+	}
 	private move_pawn(evt) {
 		if(this._isOver) return;
 		let {numX, numY} = evt;
@@ -54,14 +65,21 @@ class GameLogic {
 		let userMoveCommand = new UserMovePawnCommand(numX, numY, this._me, this._chessView);
 		GameData.movePawnCommands.push(userMoveCommand);
 		this._isOver = userMoveCommand.execute();
-		
-
+		if(this._isOver) {
+			// GameEnd 
+			this.gev.show(true);
+		}
 		if(!this._isOver) {
 			this._me = !this._me;
 			let computerMoveCommand = new ComputerMovePawnCommand(this._chessView);
 			GameData.movePawnCommands.push(computerMoveCommand);
 			this._isOver = computerMoveCommand.execute();
+			if(this._isOver) {
+				// GameEnd 
+				this.gev.show(false);
+			}
 		}
+		
 	}
 
 	private tap_undo(evt) {
@@ -78,6 +96,7 @@ class GameLogic {
 
 	private tap_replay() {
 		GameData.initData();
+		this.initData();
 		this._chessView.init();
 	}
 
@@ -94,6 +113,10 @@ class GameLogic {
 	}
 	private tap_advanced() {
 		LevelGameDataParse.parseLevelGameData(this._levelConfigData.advanced);
+		this.tap_replay();
+	}
+
+	private tap_sure() {
 		this.tap_replay();
 	}
 }
