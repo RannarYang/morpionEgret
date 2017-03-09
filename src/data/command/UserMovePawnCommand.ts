@@ -14,10 +14,10 @@ class UserMovePawnCommand extends Command {
 		let isOver = false;
 		let numX = this._numX;
 		let numY = this._numY;
-		if (GameData.chessBoard[numX][numY] === 0) {
-			this._chessView.addChess(numX, numY, true);
-			GameData.chessBoard[numX][numY] = 1;
-		}
+		
+		this._chessView.addChess(numX, numY, true);
+		GameData.chessBoard[numX][numY] = 1;
+		
 		for (var k = 0; k < GameData.count; k++) {
 			if(GameData.wins[numX][numY][k]) {
 				GameData.myWin[k]++;
