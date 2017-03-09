@@ -62,7 +62,10 @@ var GameData = (function () {
             GameData.myWin[i] = 0;
             GameData.computerWin[i] = 0;
         }
+        // init count
         GameData.count = count;
+        // init movePawnCommands
+        this.movePawnCommands = [];
         GameData.stageW = egret.MainContext.instance.stage.stageWidth;
         GameData.stageH = egret.MainContext.instance.stage.stageHeight;
     };
@@ -159,7 +162,6 @@ GameData.chessBoard = [];
 GameData.myWin = [];
 GameData.computerWin = [];
 GameData.count = 0;
-GameData.movePawnCommands = [];
 GameData.row = 15;
 GameData.col = 15;
 GameData.stageW = 0;

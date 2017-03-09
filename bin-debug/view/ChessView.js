@@ -10,9 +10,14 @@ var ChessView = (function (_super) {
     __extends(ChessView, _super);
     function ChessView() {
         var _this = _super.call(this) || this;
-        _this.myShapes = [];
+        _this.init();
         return _this;
     }
+    ChessView.prototype.init = function () {
+        this.removeChildren();
+        this.myShapes = [];
+        this.tipShape = null;
+    };
     ChessView.prototype.addChess = function (i, j, me) {
         this.removeTipChess();
         var myShape = new egret.Shape();

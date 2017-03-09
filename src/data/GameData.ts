@@ -9,7 +9,7 @@ class GameData {
 	public static computerWin : number[] = [];
 	public static count : number = 0;
 
-	public static movePawnCommands : Command[] = [];
+	public static movePawnCommands : Command[];
 	public static row: number = 15;
 	public static col: number = 15;
 
@@ -75,7 +75,10 @@ class GameData {
 			GameData.myWin[i] = 0;
 			GameData.computerWin[i] = 0;
 		}
+		// init count
 		GameData.count = count;
+		// init movePawnCommands
+		this.movePawnCommands = [];
 		GameData.stageW = egret.MainContext.instance.stage.stageWidth;
 		GameData.stageH = egret.MainContext.instance.stage.stageHeight;
 	}

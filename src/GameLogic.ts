@@ -14,7 +14,6 @@ class GameLogic {
 		GameData.initData(); // 初始化数据
 
 		let levelConfigData = RES.getRes("levelConfig_json");
-		console.log(levelConfigData);
 		LevelGameDataParse.parseLevelGameData(levelConfigData.middle);
 
 		// 加入棋盘
@@ -34,6 +33,7 @@ class GameLogic {
 		chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
+		this.bvm.addEventListener(ButtonViewManageEvent.TAP_REPLAY, this.tap_replay, this);
 	}
 
 	private move_pawn(evt) {
@@ -63,5 +63,10 @@ class GameLogic {
 	private tap_tips(evt) {
 		let {numX, numY} = GameData.getNextStep(true);
 		this._chessView.addTipChess(numX, numY);
+	}
+
+	private tap_replay() {
+		GameData.initData();
+		this._chessView.init();
 	}
 }

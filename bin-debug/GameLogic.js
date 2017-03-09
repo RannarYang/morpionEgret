@@ -11,7 +11,6 @@ var GameLogic = (function () {
     GameLogic.prototype.init = function () {
         GameData.initData(); // 初始化数据
         var levelConfigData = RES.getRes("levelConfig_json");
-        console.log(levelConfigData);
         LevelGameDataParse.parseLevelGameData(levelConfigData.middle);
         // 加入棋盘
         var cbc = new egret.Sprite();
@@ -27,6 +26,7 @@ var GameLogic = (function () {
         chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
+        this.bvm.addEventListener(ButtonViewManageEvent.TAP_REPLAY, this.tap_replay, this);
     };
     GameLogic.prototype.move_pawn = function (evt) {
         if (this._isOver)
@@ -53,6 +53,10 @@ var GameLogic = (function () {
     GameLogic.prototype.tap_tips = function (evt) {
         var _a = GameData.getNextStep(true), numX = _a.numX, numY = _a.numY;
         this._chessView.addTipChess(numX, numY);
+    };
+    GameLogic.prototype.tap_replay = function () {
+        GameData.initData();
+        this._chessView.init();
     };
     return GameLogic;
 }());

@@ -3,7 +3,12 @@ class ChessView extends egret.Sprite{
 	private tipShape: egret.Shape;
 	public constructor() {
 		super();
+		this.init();
+	}
+	public init() {
+		this.removeChildren();
 		this.myShapes = [];
+		this.tipShape = null;
 	}
 	public addChess(i, j, me) {
 		this.removeTipChess();
