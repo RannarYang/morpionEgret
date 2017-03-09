@@ -33,6 +33,7 @@ class GameLogic {
 
 		chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
 		this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
+		this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
 	}
 
 	private move_pawn(evt) {
@@ -59,4 +60,8 @@ class GameLogic {
 		}
 	}
 
+	private tap_tips(evt) {
+		let {numX, numY} = GameData.getNextStep(true);
+		this._chessView.addTipChess(numX, numY);
+	}
 }

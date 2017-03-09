@@ -79,4 +79,82 @@ class GameData {
 		GameData.stageW = egret.MainContext.instance.stage.stageWidth;
 		GameData.stageH = egret.MainContext.instance.stage.stageHeight;
 	}
+	public static getNextStep(me) {
+		let myWin = [];
+		let enemyWin = [];
+		if(!me) { // computer 调用的情况下
+			myWin = GameData.computerWin;
+			enemyWin = GameData.myWin;
+		} else { // 自己调用的情况下
+			myWin = GameData.myWin;
+			enemyWin = GameData.computerWin;
+		}
+		let enemyScore = [];
+		let myScore = [];
+		let max = 0;
+		let u = 0, v = 0;
+		for(let i = 0; i < 15; i++) {
+			enemyScore[i] = [];
+			myScore[i] = [];
+			for(let j = 0; j < 15; j++) {
+				enemyScore[i][j] = 0;
+				myScore[i][j] = 0;
+			}
+		}
+		for(let i = 0; i < 15; i++) {
+			for(let j = 0; j < 15; j++) {
+				if(GameData.chessBoard[i][j] === 0) {
+					for(let k = 0; k < GameData.count; k++) {
+						if(GameData.wins[i][j][k]) {
+							if(enemyWin[k] === 1) {
+								enemyScore[i][j] += 200;
+							} else if(enemyWin[k] === 2) {
+								enemyScore[i][j] += 400;
+							} else if (enemyWin[k] === 3) {
+								enemyScore[i][j] += 2000;
+							} else if(enemyWin[k] === 4) {
+								myScore[i][j] += 10000;
+							}
+
+							if(myWin[k] === 1) {
+								myScore[i][j] += 220;
+							} else if(myWin[k] === 2) {
+								myScore[i][j] += 420;
+							} else if (myWin[k] === 3) {
+								myScore[i][j] += 2100;
+							} else if(myWin[k] === 4) {
+								myScore[i][j] += 20000;
+							}
+						}
+					}
+					if(enemyScore[i][j] > max) {
+						max = enemyScore[i][j];
+						u = i;
+						v = j;
+					} else if (enemyScore[i][j] === max) {
+						if(myScore[i][j] > myScore[u][v]) {
+							u = i;
+							v = j;
+						}
+					}
+
+					if(myScore[i][j] > max) {
+						max = myScore[i][j];
+						u = i;
+						v = j;
+					} else if (myScore[i][j] === max) {
+						if(enemyScore[i][j] > enemyScore[u][v]) {
+							u = i;
+							v = j;
+						}
+					}
+
+				}
+			}
+		}
+		return {
+			numX : u,
+			numY : v
+		}
+	}
 }

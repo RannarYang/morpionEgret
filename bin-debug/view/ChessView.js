@@ -14,6 +14,7 @@ var ChessView = (function (_super) {
         return _this;
     }
     ChessView.prototype.addChess = function (i, j, me) {
+        this.removeTipChess();
         var myShape = new egret.Shape();
         var rx = 20 + i * 40;
         var ry = 30 + 20 + j * 40;
@@ -30,8 +31,26 @@ var ChessView = (function (_super) {
         this.addChild(myShape);
     };
     ChessView.prototype.removeChess = function () {
+        this.removeTipChess(); // 如果之前有提示，则删除提示功能
         var myShape = this.myShapes.pop();
         this.removeChild(myShape);
+    };
+    ChessView.prototype.addTipChess = function (i, j) {
+        if (!this.tipShape) {
+            var tipShape = this.tipShape = new egret.Shape();
+            var rx = 20 + i * 40;
+            var ry = 30 + 20 + j * 40;
+            tipShape.graphics.beginFill(0xff0000, 0.5);
+            tipShape.graphics.drawCircle(rx, ry, 10);
+            tipShape.graphics.endFill();
+            this.addChild(tipShape);
+        }
+    };
+    ChessView.prototype.removeTipChess = function () {
+        if (this.tipShape) {
+            this.removeChild(this.tipShape);
+            this.tipShape = null;
+        }
     };
     return ChessView;
 }(egret.Sprite));

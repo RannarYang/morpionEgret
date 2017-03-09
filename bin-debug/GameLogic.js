@@ -26,6 +26,7 @@ var GameLogic = (function () {
         this.bvm = new ButtonViewManage(bvmc);
         chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
         this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
+        this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
     };
     GameLogic.prototype.move_pawn = function (evt) {
         if (this._isOver)
@@ -48,6 +49,10 @@ var GameLogic = (function () {
             var command = GameData.movePawnCommands.pop();
             command.undo();
         }
+    };
+    GameLogic.prototype.tap_tips = function (evt) {
+        var _a = GameData.getNextStep(true), numX = _a.numX, numY = _a.numY;
+        this._chessView.addTipChess(numX, numY);
     };
     return GameLogic;
 }());
