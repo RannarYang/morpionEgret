@@ -26,6 +26,7 @@ var ButtonView = (function (_super) {
     ButtonView.prototype.createView = function () {
         this._view = new egret.Bitmap();
         this._view.texture = RES.getRes(this._activeTexture);
+        this._view.touchEnabled = true;
         this.addChild(this._view);
     };
     return ButtonView;

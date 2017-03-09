@@ -6,6 +6,8 @@ var Command = (function () {
     }
     Command.prototype.execute = function () {
     };
+    Command.prototype.undo = function () {
+    };
     return Command;
 }());
 __reflect(Command.prototype, "Command");

@@ -9,7 +9,7 @@ class GameData {
 	public static computerWin : number[] = [];
 	public static count : number = 0;
 
-	public static movePawnCommand : MovePawnCommand[] = [];
+	public static movePawnCommands : Command[] = [];
 	public static row: number = 15;
 	public static col: number = 15;
 
