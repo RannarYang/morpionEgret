@@ -11,7 +11,25 @@ class ButtonViewManage extends egret.EventDispatcher{
 		this._layer = layer;
 		this.init();
 	}
-
+	private disableUndo() {
+		this._undoProp.disable();
+	}
+	public enableUndo() {
+		this._undoProp.enable();
+	}
+	public disableTips() {
+		this._tipsProp.disable();
+	}
+	public enableTips() {
+		this._tipsProp.enable();
+	}
+	public update(pawnLen: number) {
+		if(pawnLen > 0) {
+			this.enableUndo();
+		} else {
+			this.disableUndo();
+		}
+	}
 	private init() {
 		this.initUndoProp();
 		this.initTipsProp();
@@ -24,10 +42,16 @@ class ButtonViewManage extends egret.EventDispatcher{
 			btn.x = 24 + (24 + btn.width) * i;
             btn.y = 630;
 		}
+		this.initData();
+	}
+	public initData(){
+		this._undoProp.num = GameData.undoNum;
+		this._tipsProp.num = GameData.hintNum;
 	}
 	private initUndoProp() {
 		let undoProp = this._undoProp = new PropView('undo');
 		this._layer.addChild(undoProp);
+		this.disableUndo();
 		this._buttonArr.push(undoProp);
 		undoProp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_undo, this);
 	}
@@ -54,10 +78,16 @@ class ButtonViewManage extends egret.EventDispatcher{
 	}
 
 	private tap_undo() {
+		if(this._undoProp.num !== -1) {
+			this._undoProp.num--;
+		}
 		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_UNDO);
 		this.dispatchEvent(evt);
 	}
 	private tap_tips() {
+		if(this._tipsProp.num !== -1) {
+			this._tipsProp.num--;	
+		}
 		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_TIPS);
 		this.dispatchEvent(evt);
 	}

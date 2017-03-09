@@ -9,12 +9,14 @@ class GameData {
 	public static computerWin : number[] = [];
 	public static count : number = 0;
 
-	public static movePawnCommands : Command[];
+	private static movePawnCommands : Command[];
 	public static row: number = 15;
 	public static col: number = 15;
 
 	public static stageW: number = 0;
 	public static stageH: number = 0;
+
+	private static _pawnObservers = [];
 	public static initData() {
 		// init ChessBoard
 		for (let i = 0; i < GameData.row; i++) {
@@ -158,6 +160,23 @@ class GameData {
 		return {
 			numX : u,
 			numY : v
+		}
+	}
+	public static movePawnCommandsPop() {
+		let command = this.movePawnCommands.pop();
+		this.updateObserver();
+		return command;
+	}
+	public static movePawnCommandsPush(command: Command) {
+		this.movePawnCommands.push(command);
+		this.updateObserver();
+	}
+	public static addPawnObserver(observer) {
+		this._pawnObservers.push(observer);
+	}
+	private static updateObserver() {
+		for(let i = 0; i < this._pawnObservers.length; i++) {
+			this._pawnObservers[i].update(this.movePawnCommands.length);
 		}
 	}
 }

@@ -153,6 +153,23 @@ var GameData = (function () {
             numY: v
         };
     };
+    GameData.movePawnCommandsPop = function () {
+        var command = this.movePawnCommands.pop();
+        this.updateObserver();
+        return command;
+    };
+    GameData.movePawnCommandsPush = function (command) {
+        this.movePawnCommands.push(command);
+        this.updateObserver();
+    };
+    GameData.addPawnObserver = function (observer) {
+        this._pawnObservers.push(observer);
+    };
+    GameData.updateObserver = function () {
+        for (var i = 0; i < this._pawnObservers.length; i++) {
+            this._pawnObservers[i].update(this.movePawnCommands.length);
+        }
+    };
     return GameData;
 }());
 GameData.AI = "AI1";
@@ -166,4 +183,5 @@ GameData.row = 15;
 GameData.col = 15;
 GameData.stageW = 0;
 GameData.stageH = 0;
+GameData._pawnObservers = [];
 __reflect(GameData.prototype, "GameData");

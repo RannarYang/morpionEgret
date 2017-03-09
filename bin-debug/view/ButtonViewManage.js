@@ -15,6 +15,26 @@ var ButtonViewManage = (function (_super) {
         _this.init();
         return _this;
     }
+    ButtonViewManage.prototype.disableUndo = function () {
+        this._undoProp.disable();
+    };
+    ButtonViewManage.prototype.enableUndo = function () {
+        this._undoProp.enable();
+    };
+    ButtonViewManage.prototype.disableTips = function () {
+        this._tipsProp.disable();
+    };
+    ButtonViewManage.prototype.enableTips = function () {
+        this._tipsProp.enable();
+    };
+    ButtonViewManage.prototype.update = function (pawnLen) {
+        if (pawnLen > 0) {
+            this.enableUndo();
+        }
+        else {
+            this.disableUndo();
+        }
+    };
     ButtonViewManage.prototype.init = function () {
         this.initUndoProp();
         this.initTipsProp();
@@ -27,10 +47,16 @@ var ButtonViewManage = (function (_super) {
             btn.x = 24 + (24 + btn.width) * i;
             btn.y = 630;
         }
+        this.initData();
+    };
+    ButtonViewManage.prototype.initData = function () {
+        this._undoProp.num = GameData.undoNum;
+        this._tipsProp.num = GameData.hintNum;
     };
     ButtonViewManage.prototype.initUndoProp = function () {
         var undoProp = this._undoProp = new PropView('undo');
         this._layer.addChild(undoProp);
+        this.disableUndo();
         this._buttonArr.push(undoProp);
         undoProp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_undo, this);
     };
@@ -53,10 +79,16 @@ var ButtonViewManage = (function (_super) {
         levelBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_level, this);
     };
     ButtonViewManage.prototype.tap_undo = function () {
+        if (this._undoProp.num !== -1) {
+            this._undoProp.num--;
+        }
         var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_UNDO);
         this.dispatchEvent(evt);
     };
     ButtonViewManage.prototype.tap_tips = function () {
+        if (this._tipsProp.num !== -1) {
+            this._tipsProp.num--;
+        }
         var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_TIPS);
         this.dispatchEvent(evt);
     };

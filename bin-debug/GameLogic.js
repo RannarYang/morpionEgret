@@ -23,6 +23,7 @@ var GameLogic = (function () {
         var bvmc = new egret.Sprite();
         this._gameStage.addChild(bvmc);
         this.bvm = new ButtonViewManage(bvmc);
+        GameData.addPawnObserver(this.bvm);
         // 加入关卡选择
         var levelc = new egret.Sprite();
         this._gameStage.addChild(levelc);
@@ -52,16 +53,16 @@ var GameLogic = (function () {
         if (GameData.chessBoard[numX][numY] !== 0)
             return;
         var userMoveCommand = new UserMovePawnCommand(numX, numY, this._me, this._chessView);
-        GameData.movePawnCommands.push(userMoveCommand);
+        GameData.movePawnCommandsPush(userMoveCommand);
         this._isOver = userMoveCommand.execute();
         if (this._isOver) {
             // GameEnd 
             this.gev.show(true);
         }
-        if (!this._isOver) {
+        else {
             this._me = !this._me;
             var computerMoveCommand = new ComputerMovePawnCommand(this._chessView);
-            GameData.movePawnCommands.push(computerMoveCommand);
+            GameData.movePawnCommandsPush(computerMoveCommand);
             this._isOver = computerMoveCommand.execute();
             if (this._isOver) {
                 // GameEnd 
@@ -70,10 +71,17 @@ var GameLogic = (function () {
         }
     };
     GameLogic.prototype.tap_undo = function (evt) {
-        for (var i = 0; i < 2; i++) {
-            var command = GameData.movePawnCommands.pop();
+        var undoTime = 2;
+        if (this._isOver && !this._me) {
+            undoTime = 1;
+        }
+        this._me = true;
+        this._isOver = false;
+        for (var i = 0; i < undoTime; i++) {
+            var command = GameData.movePawnCommandsPop();
             command.undo();
         }
+        this.bvm.enableTips();
     };
     GameLogic.prototype.tap_tips = function (evt) {
         var _a = GameData.getNextStep(true), numX = _a.numX, numY = _a.numY;
@@ -82,6 +90,7 @@ var GameLogic = (function () {
     GameLogic.prototype.tap_replay = function () {
         GameData.initData();
         this.initData();
+        this.bvm.initData();
         this._chessView.init();
     };
     GameLogic.prototype.tap_level = function () {
@@ -100,7 +109,7 @@ var GameLogic = (function () {
         this.tap_replay();
     };
     GameLogic.prototype.tap_sure = function () {
-        this.tap_replay();
+        this.bvm.disableTips();
     };
     return GameLogic;
 }());

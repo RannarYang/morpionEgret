@@ -31,6 +31,7 @@ class GameLogic {
 		let bvmc:egret.Sprite = new egret.Sprite();
 		this._gameStage.addChild(bvmc);
 		this.bvm = new ButtonViewManage(bvmc);
+		GameData.addPawnObserver(this.bvm);
 
 		// 加入关卡选择
 		let levelc: egret.Sprite = new egret.Sprite();
@@ -63,16 +64,15 @@ class GameLogic {
 		let {numX, numY} = evt;
 		if (GameData.chessBoard[numX][numY] !== 0) return;
 		let userMoveCommand = new UserMovePawnCommand(numX, numY, this._me, this._chessView);
-		GameData.movePawnCommands.push(userMoveCommand);
+		GameData.movePawnCommandsPush(userMoveCommand);
 		this._isOver = userMoveCommand.execute();
 		if(this._isOver) {
 			// GameEnd 
 			this.gev.show(true);
-		}
-		if(!this._isOver) {
+		} else {
 			this._me = !this._me;
 			let computerMoveCommand = new ComputerMovePawnCommand(this._chessView);
-			GameData.movePawnCommands.push(computerMoveCommand);
+			GameData.movePawnCommandsPush(computerMoveCommand);
 			this._isOver = computerMoveCommand.execute();
 			if(this._isOver) {
 				// GameEnd 
@@ -83,10 +83,17 @@ class GameLogic {
 	}
 
 	private tap_undo(evt) {
-		for(let i = 0; i < 2; i++) {
-			let command = GameData.movePawnCommands.pop();
+		let undoTime = 2;
+		if(this._isOver && !this._me){
+			undoTime = 1;
+		}
+		this._me = true;
+		this._isOver = false;
+		for(let i = 0; i < undoTime; i++) {
+			let command = GameData.movePawnCommandsPop();
 			command.undo();
 		}
+		this.bvm.enableTips();
 	}
 
 	private tap_tips(evt) {
@@ -97,6 +104,7 @@ class GameLogic {
 	private tap_replay() {
 		GameData.initData();
 		this.initData();
+		this.bvm.initData();
 		this._chessView.init();
 	}
 
@@ -117,6 +125,6 @@ class GameLogic {
 	}
 
 	private tap_sure() {
-		this.tap_replay();
+		this.bvm.disableTips();
 	}
 }

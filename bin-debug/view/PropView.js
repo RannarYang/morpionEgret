@@ -19,36 +19,48 @@ var PropView = (function (_super) {
         },
         set: function (val) {
             this._num = val;
-            this._numText.text = val.toString();
-            if (val < 0) {
-                this.setActiveState(false);
+            if (val > 0) {
+                this.setActiveState(val, true);
+            }
+            else if (val === 0) {
+                this.setActiveState(val, false);
             }
             else {
-                this.setActiveState(true);
+                this.setActiveState(-1, true);
             }
         },
         enumerable: true,
         configurable: true
     });
+    PropView.prototype.disable = function () {
+        _super.prototype.disable.call(this);
+        this.setActiveState(this._num, false);
+    };
+    PropView.prototype.enable = function () {
+        if (this._num > 0 || this._num === -1) {
+            _super.prototype.enable.call(this);
+            this.setActiveState(this._num, true);
+        }
+    };
     PropView.prototype.init = function () {
         this.createView();
         this.createNumText();
     };
     PropView.prototype.createNumText = function () {
-        this._numText = new egret.BitmapText();
-        this._numText.font = RES.getRes("number_fnt");
-        this._numText.x = this._view.width - 31;
+        this._numText = new egret.Bitmap();
+        this._numText.x = 90;
+        this._numText.y = -20;
         this.addChild(this._numText);
     };
-    PropView.prototype.setActiveState = function (val) {
+    PropView.prototype.setActiveState = function (num, val) {
         this.touchEnabled = val;
         if (val) {
             this._view.texture = RES.getRes(this._activeTexture);
-            this._numText.font = RES.getRes("number_fnt");
+            this._numText.texture = RES.getRes("num" + num + "_png");
         }
         else {
             this._view.texture = RES.getRes(this._disableTexture);
-            this._numText.font = RES.getRes("numberdisable_fnt");
+            this._numText.texture = RES.getRes("num" + num + "_disable_png");
         }
     };
     return PropView;

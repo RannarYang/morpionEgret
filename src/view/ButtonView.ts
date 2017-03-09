@@ -12,6 +12,14 @@ class ButtonView extends egret.Sprite {
 		this._disableTexture = buttonConfig[name].disableTexture;
 		this.init();
 	}
+	public disable() {
+		this._view.texture = RES.getRes(this._disableTexture); 
+		this._view.touchEnabled = false;
+	}
+	public enable() {
+		this._view.texture = RES.getRes(this._activeTexture); 
+		this._view.touchEnabled = true;
+	}
 	protected init() {
 		this.createView();
 	}
