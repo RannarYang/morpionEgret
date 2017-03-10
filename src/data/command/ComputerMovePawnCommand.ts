@@ -1,9 +1,8 @@
-class ComputerMovePawnCommand extends Command{
+class ComputerMovePawnCommand implements Command{
 	private _numX;
 	private _numY;
 	private _chessView: ChessView;
 	public constructor(chessView: ChessView) {
-		super();
 		this._chessView = chessView;
 	}
 	public execute() {
@@ -24,7 +23,7 @@ class ComputerMovePawnCommand extends Command{
 		}
 		return _isOver;
 	}
-	public undo() {
+	public undo(){
 		let u = this._numX;
 		let v = this._numY;
 		this._chessView.removeChess();

@@ -1,4 +1,4 @@
-class ChessBoardEvent extends egret.Event{
+class ChessBoardViewEvent extends egret.Event{
 	public static MOVE_PAWN: string = "move_pawn";
 	public numX : number = 0;
 	public numY : number = 0;

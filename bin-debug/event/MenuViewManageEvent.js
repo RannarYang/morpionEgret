@@ -6,17 +6,17 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var ButtonViewManageEvent = (function (_super) {
-    __extends(ButtonViewManageEvent, _super);
-    function ButtonViewManageEvent(type, bubbles, cancelable) {
+var MenuViewManageEvent = (function (_super) {
+    __extends(MenuViewManageEvent, _super);
+    function MenuViewManageEvent(type, bubbles, cancelable) {
         if (bubbles === void 0) { bubbles = false; }
         if (cancelable === void 0) { cancelable = false; }
         return _super.call(this, type, bubbles, cancelable) || this;
     }
-    return ButtonViewManageEvent;
+    return MenuViewManageEvent;
 }(egret.Event));
-ButtonViewManageEvent.TAP_UNDO = "tap_undo";
-ButtonViewManageEvent.TAP_TIPS = "tap_tips";
-ButtonViewManageEvent.TAP_REPLAY = "tap_replay";
-ButtonViewManageEvent.TAP_LEVEL = "tap_level";
-__reflect(ButtonViewManageEvent.prototype, "ButtonViewManageEvent");
+MenuViewManageEvent.TAP_UNDO = "tap_undo";
+MenuViewManageEvent.TAP_TIPS = "tap_tips";
+MenuViewManageEvent.TAP_REPLAY = "tap_replay";
+MenuViewManageEvent.TAP_LEVEL = "tap_level";
+__reflect(MenuViewManageEvent.prototype, "MenuViewManageEvent");

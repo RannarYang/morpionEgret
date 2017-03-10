@@ -77,17 +77,17 @@ var LevelViewManage = (function (_super) {
     };
     LevelViewManage.prototype.tap_primary = function () {
         this.hide();
-        var evt = new ButtonViewManageEvent(LevelViewManageEvent.TAP_PRIMARY);
+        var evt = new MenuViewManageEvent(LevelViewManageEvent.TAP_PRIMARY);
         this.dispatchEvent(evt);
     };
     LevelViewManage.prototype.tap_middle = function () {
         this.hide();
-        var evt = new ButtonViewManageEvent(LevelViewManageEvent.TAP_MIDDLE);
+        var evt = new MenuViewManageEvent(LevelViewManageEvent.TAP_MIDDLE);
         this.dispatchEvent(evt);
     };
     LevelViewManage.prototype.tap_advanced = function () {
         this.hide();
-        var evt = new ButtonViewManageEvent(LevelViewManageEvent.TAP_ADVANCED);
+        var evt = new MenuViewManageEvent(LevelViewManageEvent.TAP_ADVANCED);
         this.dispatchEvent(evt);
     };
     LevelViewManage.prototype.tap_close = function () {

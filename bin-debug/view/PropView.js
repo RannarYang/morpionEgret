@@ -9,9 +9,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var PropView = (function (_super) {
     __extends(PropView, _super);
     function PropView(name) {
-        var _this = _super.call(this, name) || this;
-        _this._num = 0; // 道具的数量
-        return _this;
+        return _super.call(this, name) || this;
     }
     Object.defineProperty(PropView.prototype, "num", {
         get: function () {
@@ -22,11 +20,8 @@ var PropView = (function (_super) {
             if (val > 0) {
                 this.setActiveState(val, true);
             }
-            else if (val === 0) {
-                this.setActiveState(val, false);
-            }
             else {
-                this.setActiveState(-1, true);
+                this.setActiveState(val, false);
             }
         },
         enumerable: true,
@@ -37,7 +32,7 @@ var PropView = (function (_super) {
         this.setActiveState(this._num, false);
     };
     PropView.prototype.enable = function () {
-        if (this._num > 0 || this._num === -1) {
+        if (this._num > 0) {
             _super.prototype.enable.call(this);
             this.setActiveState(this._num, true);
         }

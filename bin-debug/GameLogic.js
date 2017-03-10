@@ -13,34 +13,34 @@ var GameLogic = (function () {
         var levelConfigData = this._levelConfigData = RES.getRes("levelConfig_json");
         LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary); // 默认是初级的
         // 加入棋盘
-        var cbc = new egret.Sprite();
-        var chessboard = new ChessBoard(cbc);
-        this._gameStage.addChild(cbc);
+        var cbvs = new egret.Sprite();
+        var chessBoardView = new ChessBoardView(cbvs);
+        this._gameStage.addChild(cbvs);
         // 加入棋子
         var chessView = this._chessView = new ChessView();
         this._gameStage.addChild(chessView);
         // 加入按钮组
-        var bvmc = new egret.Sprite();
-        this._gameStage.addChild(bvmc);
-        this.bvm = new ButtonViewManage(bvmc);
-        GameData.addPawnObserver(this.bvm);
+        var mvms = new egret.Sprite();
+        this._gameStage.addChild(mvms);
+        this._menuViewManage = new MenuViewManage(mvms);
+        GameData.addPawnObserver(this._menuViewManage);
         // 加入关卡选择
-        var levelc = new egret.Sprite();
-        this._gameStage.addChild(levelc);
-        this.lvm = new LevelViewManage(levelc);
-        this.lvm.hide();
-        var endv = new egret.Sprite();
-        this._gameStage.addChild(endv);
-        this.gev = new GameEndView(endv);
-        chessboard.addEventListener(ChessBoardEvent.MOVE_PAWN, this.move_pawn, this);
-        this.bvm.addEventListener(ButtonViewManageEvent.TAP_UNDO, this.tap_undo, this);
-        this.bvm.addEventListener(ButtonViewManageEvent.TAP_TIPS, this.tap_tips, this);
-        this.bvm.addEventListener(ButtonViewManageEvent.TAP_REPLAY, this.tap_replay, this);
-        this.bvm.addEventListener(ButtonViewManageEvent.TAP_LEVEL, this.tap_level, this);
-        this.lvm.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
-        this.lvm.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
-        this.lvm.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
-        this.gev.addEventListener(GameEndViewEvent.TAP_SURE, this.tap_sure, this);
+        var lvms = new egret.Sprite();
+        this._gameStage.addChild(lvms);
+        this._leveViewManage = new LevelViewManage(lvms);
+        this._leveViewManage.hide();
+        var gevv = new egret.Sprite();
+        this._gameStage.addChild(gevv);
+        this._gameEndView = new GameEndView(gevv);
+        chessBoardView.addEventListener(ChessBoardViewEvent.MOVE_PAWN, this.move_pawn, this);
+        this._menuViewManage.addEventListener(MenuViewManageEvent.TAP_UNDO, this.tap_undo, this);
+        this._menuViewManage.addEventListener(MenuViewManageEvent.TAP_TIPS, this.tap_tips, this);
+        this._menuViewManage.addEventListener(MenuViewManageEvent.TAP_REPLAY, this.tap_replay, this);
+        this._menuViewManage.addEventListener(MenuViewManageEvent.TAP_LEVEL, this.tap_level, this);
+        this._leveViewManage.addEventListener(LevelViewManageEvent.TAP_PRIMARY, this.tap_primary, this);
+        this._leveViewManage.addEventListener(LevelViewManageEvent.TAP_MIDDLE, this.tap_middle, this);
+        this._leveViewManage.addEventListener(LevelViewManageEvent.TAP_ADVANCED, this.tap_advanced, this);
+        this._gameEndView.addEventListener(GameEndViewEvent.TAP_SURE, this.tap_sure, this);
     };
     GameLogic.prototype.initData = function () {
         this._me = true;
@@ -57,7 +57,7 @@ var GameLogic = (function () {
         this._isOver = userMoveCommand.execute();
         if (this._isOver) {
             // GameEnd 
-            this.gev.show(true);
+            this._gameEndView.show(true);
         }
         else {
             this._me = !this._me;
@@ -66,22 +66,19 @@ var GameLogic = (function () {
             this._isOver = computerMoveCommand.execute();
             if (this._isOver) {
                 // GameEnd 
-                this.gev.show(false);
+                this._gameEndView.show(false);
             }
         }
     };
     GameLogic.prototype.tap_undo = function (evt) {
-        var undoTime = 2;
-        if (this._isOver && !this._me) {
-            undoTime = 1;
-        }
-        this._me = true;
-        this._isOver = false;
+        var undoTime = (GameData.movePawnCommandsLen() % 2) === 0 ? 2 : 1;
         for (var i = 0; i < undoTime; i++) {
             var command = GameData.movePawnCommandsPop();
             command.undo();
         }
-        this.bvm.enableTips();
+        this._me = true;
+        this._isOver = false;
+        this._menuViewManage.enableTips();
     };
     GameLogic.prototype.tap_tips = function (evt) {
         var _a = GameData.getNextStep(true), numX = _a.numX, numY = _a.numY;
@@ -90,11 +87,11 @@ var GameLogic = (function () {
     GameLogic.prototype.tap_replay = function () {
         GameData.initData();
         this.initData();
-        this.bvm.initData();
+        this._menuViewManage.initData();
         this._chessView.init();
     };
     GameLogic.prototype.tap_level = function () {
-        this.lvm.show();
+        this._leveViewManage.show();
     };
     GameLogic.prototype.tap_primary = function () {
         LevelGameDataParse.parseLevelGameData(this._levelConfigData.primary);
@@ -109,7 +106,7 @@ var GameLogic = (function () {
         this.tap_replay();
     };
     GameLogic.prototype.tap_sure = function () {
-        this.bvm.disableTips();
+        this._menuViewManage.disableTips();
     };
     return GameLogic;
 }());

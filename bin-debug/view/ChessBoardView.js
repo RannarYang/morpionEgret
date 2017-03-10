@@ -6,15 +6,15 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var ChessBoard = (function (_super) {
-    __extends(ChessBoard, _super);
-    function ChessBoard(layer) {
+var ChessBoardView = (function (_super) {
+    __extends(ChessBoardView, _super);
+    function ChessBoardView(layer) {
         var _this = _super.call(this) || this;
         _this._layer = layer;
         _this.init();
         return _this;
     }
-    ChessBoard.prototype.init = function () {
+    ChessBoardView.prototype.init = function () {
         var myShape = new egret.Shape();
         // myShape.y = 30;
         myShape.graphics.beginFill(0xd86525, 1);
@@ -33,12 +33,12 @@ var ChessBoard = (function (_super) {
         myShape.touchEnabled = true;
         myShape.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap, this);
     };
-    ChessBoard.prototype.tap = function (e) {
-        var evt = new ChessBoardEvent(ChessBoardEvent.MOVE_PAWN);
+    ChessBoardView.prototype.tap = function (e) {
+        var evt = new ChessBoardViewEvent(ChessBoardViewEvent.MOVE_PAWN);
         evt.numX = Math.floor(e.stageX / 40);
         evt.numY = Math.floor((e.stageY - 30) / 40);
         this.dispatchEvent(evt);
     };
-    return ChessBoard;
+    return ChessBoardView;
 }(egret.EventDispatcher));
-__reflect(ChessBoard.prototype, "ChessBoard");
+__reflect(ChessBoardView.prototype, "ChessBoardView");

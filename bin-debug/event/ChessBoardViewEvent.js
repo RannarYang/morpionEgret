@@ -6,9 +6,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var ChessBoardEvent = (function (_super) {
-    __extends(ChessBoardEvent, _super);
-    function ChessBoardEvent(type, bubbles, cancelable) {
+var ChessBoardViewEvent = (function (_super) {
+    __extends(ChessBoardViewEvent, _super);
+    function ChessBoardViewEvent(type, bubbles, cancelable) {
         if (bubbles === void 0) { bubbles = false; }
         if (cancelable === void 0) { cancelable = false; }
         var _this = _super.call(this, type, bubbles, cancelable) || this;
@@ -16,7 +16,7 @@ var ChessBoardEvent = (function (_super) {
         _this.numY = 0;
         return _this;
     }
-    return ChessBoardEvent;
+    return ChessBoardViewEvent;
 }(egret.Event));
-ChessBoardEvent.MOVE_PAWN = "move_pawn";
-__reflect(ChessBoardEvent.prototype, "ChessBoardEvent");
+ChessBoardViewEvent.MOVE_PAWN = "move_pawn";
+__reflect(ChessBoardViewEvent.prototype, "ChessBoardViewEvent");

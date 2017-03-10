@@ -72,17 +72,17 @@ class LevelViewManage extends egret.EventDispatcher{
 	}
 	private tap_primary() {
 		this.hide();
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(LevelViewManageEvent.TAP_PRIMARY);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(LevelViewManageEvent.TAP_PRIMARY);
 		this.dispatchEvent(evt)
 	}
 	private tap_middle() {
 		this.hide();
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(LevelViewManageEvent.TAP_MIDDLE);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(LevelViewManageEvent.TAP_MIDDLE);
 		this.dispatchEvent(evt)
 	}
 	private tap_advanced() {
 		this.hide();
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(LevelViewManageEvent.TAP_ADVANCED);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(LevelViewManageEvent.TAP_ADVANCED);
 		this.dispatchEvent(evt)
 	}
 	private tap_close() {

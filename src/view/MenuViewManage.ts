@@ -1,4 +1,4 @@
-class ButtonViewManage extends egret.EventDispatcher{
+class MenuViewManage extends egret.EventDispatcher{
 	private _layer: egret.Sprite;
 	private _undoProp: PropView;
 	private _tipsProp: PropView;
@@ -46,7 +46,7 @@ class ButtonViewManage extends egret.EventDispatcher{
 	}
 	public initData(){
 		this._undoProp.num = GameData.undoNum;
-		this._tipsProp.num = GameData.hintNum;
+		this._tipsProp.num = GameData.tipsNum;
 	}
 	private initUndoProp() {
 		let undoProp = this._undoProp = new PropView('undo');
@@ -81,22 +81,22 @@ class ButtonViewManage extends egret.EventDispatcher{
 		if(this._undoProp.num !== -1) {
 			this._undoProp.num--;
 		}
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_UNDO);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(MenuViewManageEvent.TAP_UNDO);
 		this.dispatchEvent(evt);
 	}
 	private tap_tips() {
 		if(this._tipsProp.num !== -1) {
 			this._tipsProp.num--;	
 		}
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_TIPS);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(MenuViewManageEvent.TAP_TIPS);
 		this.dispatchEvent(evt);
 	}
 	private tap_replay() {
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_REPLAY);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(MenuViewManageEvent.TAP_REPLAY);
 		this.dispatchEvent(evt);
 	}
 	private tap_level() {
-		var evt:ButtonViewManageEvent = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_LEVEL);
+		var evt:MenuViewManageEvent = new MenuViewManageEvent(MenuViewManageEvent.TAP_LEVEL);
 		this.dispatchEvent(evt);
 	}
 }

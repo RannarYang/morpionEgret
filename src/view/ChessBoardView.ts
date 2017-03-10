@@ -1,4 +1,4 @@
-class ChessBoard extends egret.EventDispatcher {
+class ChessBoardView extends egret.EventDispatcher {
 	private _layer: egret.Sprite;
 	public constructor(layer: egret.Sprite) {
 		super();
@@ -28,7 +28,7 @@ class ChessBoard extends egret.EventDispatcher {
 		myShape.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap, this);
 	}
 	private tap(e: egret.TouchEvent) {
-		let evt: ChessBoardEvent = new ChessBoardEvent(ChessBoardEvent.MOVE_PAWN);
+		let evt: ChessBoardViewEvent = new ChessBoardViewEvent(ChessBoardViewEvent.MOVE_PAWN);
 		evt.numX = Math.floor(e.stageX / 40);
 		evt.numY = Math.floor((e.stageY - 30) / 40);
 		this.dispatchEvent(evt);

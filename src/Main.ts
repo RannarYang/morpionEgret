@@ -97,14 +97,9 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene():void {
-
         let gameLayer:egret.Sprite=new egret.Sprite();
         this.addChild(gameLayer);
         this._gl =new GameLogic(gameLayer);
-      
-
-
-
     }
 
   

@@ -1,10 +1,9 @@
-class UserMovePawnCommand extends Command {
+class UserMovePawnCommand implements Command {
 	private _numX: number;
 	private _numY: number;
 	private _me: boolean;
 	private _chessView: ChessView;
 	public constructor(numX: number, numY: number, me: boolean, chessView: ChessView) {
-		super();
 		this._numX = numX;
 		this._numY = numY;
 		this._me = me;
@@ -23,7 +22,6 @@ class UserMovePawnCommand extends Command {
 				GameData.myWin[k]++;
 				GameData.computerWin[k] += 6;
 				if(GameData.myWin[k] == 5) {
-					window.alert("你赢了");
 					isOver = true;
 				}
 			}

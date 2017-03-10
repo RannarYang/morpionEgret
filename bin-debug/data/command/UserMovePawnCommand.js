@@ -1,20 +1,12 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var UserMovePawnCommand = (function (_super) {
-    __extends(UserMovePawnCommand, _super);
+var UserMovePawnCommand = (function () {
     function UserMovePawnCommand(numX, numY, me, chessView) {
-        var _this = _super.call(this) || this;
-        _this._numX = numX;
-        _this._numY = numY;
-        _this._me = me;
-        _this._chessView = chessView;
-        return _this;
+        this._numX = numX;
+        this._numY = numY;
+        this._me = me;
+        this._chessView = chessView;
     }
     UserMovePawnCommand.prototype.execute = function () {
         var isOver = false;
@@ -27,7 +19,6 @@ var UserMovePawnCommand = (function (_super) {
                 GameData.myWin[k]++;
                 GameData.computerWin[k] += 6;
                 if (GameData.myWin[k] == 5) {
-                    window.alert("你赢了");
                     isOver = true;
                 }
             }
@@ -50,5 +41,5 @@ var UserMovePawnCommand = (function (_super) {
         }
     };
     return UserMovePawnCommand;
-}(Command));
-__reflect(UserMovePawnCommand.prototype, "UserMovePawnCommand");
+}());
+__reflect(UserMovePawnCommand.prototype, "UserMovePawnCommand", ["Command"]);

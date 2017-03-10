@@ -15,8 +15,8 @@ var ChessView = (function (_super) {
     }
     ChessView.prototype.init = function () {
         this.removeChildren();
-        this.myShapes = [];
-        this.tipShape = null;
+        this._myShapes = [];
+        this._tipShape = null;
     };
     ChessView.prototype.addChess = function (i, j, me) {
         this.removeTipChess();
@@ -32,17 +32,17 @@ var ChessView = (function (_super) {
         }
         myShape.graphics.drawCircle(rx, ry, 15);
         myShape.graphics.endFill();
-        this.myShapes.push(myShape);
+        this._myShapes.push(myShape);
         this.addChild(myShape);
     };
     ChessView.prototype.removeChess = function () {
         this.removeTipChess(); // 如果之前有提示，则删除提示功能
-        var myShape = this.myShapes.pop();
+        var myShape = this._myShapes.pop();
         this.removeChild(myShape);
     };
     ChessView.prototype.addTipChess = function (i, j) {
-        if (!this.tipShape) {
-            var tipShape = this.tipShape = new egret.Shape();
+        if (!this._tipShape) {
+            var tipShape = this._tipShape = new egret.Shape();
             var rx = 20 + i * 40;
             var ry = 30 + 20 + j * 40;
             tipShape.graphics.beginFill(0xff0000, 0.5);
@@ -52,9 +52,9 @@ var ChessView = (function (_super) {
         }
     };
     ChessView.prototype.removeTipChess = function () {
-        if (this.tipShape) {
-            this.removeChild(this.tipShape);
-            this.tipShape = null;
+        if (this._tipShape) {
+            this.removeChild(this._tipShape);
+            this._tipShape = null;
         }
     };
     return ChessView;

@@ -162,6 +162,9 @@ var GameData = (function () {
         this.movePawnCommands.push(command);
         this.updateObserver();
     };
+    GameData.movePawnCommandsLen = function () {
+        return this.movePawnCommands.length;
+    };
     GameData.addPawnObserver = function (observer) {
         this._pawnObservers.push(observer);
     };
@@ -174,7 +177,7 @@ var GameData = (function () {
 }());
 GameData.AI = "AI1";
 GameData.undoNum = 0;
-GameData.hintNum = 0;
+GameData.tipsNum = 0;
 GameData.chessBoard = [];
 GameData.myWin = [];
 GameData.computerWin = [];

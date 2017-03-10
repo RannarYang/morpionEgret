@@ -6,28 +6,28 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var ButtonViewManage = (function (_super) {
-    __extends(ButtonViewManage, _super);
-    function ButtonViewManage(layer) {
+var MenuViewManage = (function (_super) {
+    __extends(MenuViewManage, _super);
+    function MenuViewManage(layer) {
         var _this = _super.call(this) || this;
         _this._buttonArr = [];
         _this._layer = layer;
         _this.init();
         return _this;
     }
-    ButtonViewManage.prototype.disableUndo = function () {
+    MenuViewManage.prototype.disableUndo = function () {
         this._undoProp.disable();
     };
-    ButtonViewManage.prototype.enableUndo = function () {
+    MenuViewManage.prototype.enableUndo = function () {
         this._undoProp.enable();
     };
-    ButtonViewManage.prototype.disableTips = function () {
+    MenuViewManage.prototype.disableTips = function () {
         this._tipsProp.disable();
     };
-    ButtonViewManage.prototype.enableTips = function () {
+    MenuViewManage.prototype.enableTips = function () {
         this._tipsProp.enable();
     };
-    ButtonViewManage.prototype.update = function (pawnLen) {
+    MenuViewManage.prototype.update = function (pawnLen) {
         if (pawnLen > 0) {
             this.enableUndo();
         }
@@ -35,7 +35,7 @@ var ButtonViewManage = (function (_super) {
             this.disableUndo();
         }
     };
-    ButtonViewManage.prototype.init = function () {
+    MenuViewManage.prototype.init = function () {
         this.initUndoProp();
         this.initTipsProp();
         this.initReplayBtn();
@@ -49,57 +49,57 @@ var ButtonViewManage = (function (_super) {
         }
         this.initData();
     };
-    ButtonViewManage.prototype.initData = function () {
+    MenuViewManage.prototype.initData = function () {
         this._undoProp.num = GameData.undoNum;
-        this._tipsProp.num = GameData.hintNum;
+        this._tipsProp.num = GameData.tipsNum;
     };
-    ButtonViewManage.prototype.initUndoProp = function () {
+    MenuViewManage.prototype.initUndoProp = function () {
         var undoProp = this._undoProp = new PropView('undo');
         this._layer.addChild(undoProp);
         this.disableUndo();
         this._buttonArr.push(undoProp);
         undoProp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_undo, this);
     };
-    ButtonViewManage.prototype.initTipsProp = function () {
+    MenuViewManage.prototype.initTipsProp = function () {
         var tipsProp = this._tipsProp = new PropView('tips');
         this._layer.addChild(tipsProp);
         this._buttonArr.push(tipsProp);
         tipsProp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_tips, this);
     };
-    ButtonViewManage.prototype.initReplayBtn = function () {
+    MenuViewManage.prototype.initReplayBtn = function () {
         var replayBtn = this._replayBtn = new ButtonView('replay');
         this._layer.addChild(replayBtn);
         this._buttonArr.push(replayBtn);
         replayBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_replay, this);
     };
-    ButtonViewManage.prototype.initLevelBtn = function () {
+    MenuViewManage.prototype.initLevelBtn = function () {
         var levelBtn = this._levelBtn = new ButtonView('level');
         this._layer.addChild(levelBtn);
         this._buttonArr.push(levelBtn);
         levelBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_level, this);
     };
-    ButtonViewManage.prototype.tap_undo = function () {
+    MenuViewManage.prototype.tap_undo = function () {
         if (this._undoProp.num !== -1) {
             this._undoProp.num--;
         }
-        var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_UNDO);
+        var evt = new MenuViewManageEvent(MenuViewManageEvent.TAP_UNDO);
         this.dispatchEvent(evt);
     };
-    ButtonViewManage.prototype.tap_tips = function () {
+    MenuViewManage.prototype.tap_tips = function () {
         if (this._tipsProp.num !== -1) {
             this._tipsProp.num--;
         }
-        var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_TIPS);
+        var evt = new MenuViewManageEvent(MenuViewManageEvent.TAP_TIPS);
         this.dispatchEvent(evt);
     };
-    ButtonViewManage.prototype.tap_replay = function () {
-        var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_REPLAY);
+    MenuViewManage.prototype.tap_replay = function () {
+        var evt = new MenuViewManageEvent(MenuViewManageEvent.TAP_REPLAY);
         this.dispatchEvent(evt);
     };
-    ButtonViewManage.prototype.tap_level = function () {
-        var evt = new ButtonViewManageEvent(ButtonViewManageEvent.TAP_LEVEL);
+    MenuViewManage.prototype.tap_level = function () {
+        var evt = new MenuViewManageEvent(MenuViewManageEvent.TAP_LEVEL);
         this.dispatchEvent(evt);
     };
-    return ButtonViewManage;
+    return MenuViewManage;
 }(egret.EventDispatcher));
-__reflect(ButtonViewManage.prototype, "ButtonViewManage");
+__reflect(MenuViewManage.prototype, "MenuViewManage");

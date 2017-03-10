@@ -1,17 +1,9 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var ComputerMovePawnCommand = (function (_super) {
-    __extends(ComputerMovePawnCommand, _super);
+var ComputerMovePawnCommand = (function () {
     function ComputerMovePawnCommand(chessView) {
-        var _this = _super.call(this) || this;
-        _this._chessView = chessView;
-        return _this;
+        this._chessView = chessView;
     }
     ComputerMovePawnCommand.prototype.execute = function () {
         var _isOver = false;
@@ -44,5 +36,5 @@ var ComputerMovePawnCommand = (function (_super) {
         }
     };
     return ComputerMovePawnCommand;
-}(Command));
-__reflect(ComputerMovePawnCommand.prototype, "ComputerMovePawnCommand");
+}());
+__reflect(ComputerMovePawnCommand.prototype, "ComputerMovePawnCommand", ["Command"]);

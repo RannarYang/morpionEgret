@@ -1,20 +1,19 @@
 class PropView extends ButtonView {
 	private _numText: egret.Bitmap;
-	private _num: number = 0; // 道具的数量
+	private _num: number; // 道具的数量
+	private 
 	public constructor(name) {
 		super(name);
 	}
-	public get num() : number {
+	public get num() {
 		return this._num;
 	}
 	public set num(val: number) {
 		this._num = val;
 		if(val > 0) {
 			this.setActiveState(val, true);
-		}  else if(val === 0) {
-			this.setActiveState(val, false);
 		} else{
-			this.setActiveState(-1, true);
+			this.setActiveState(val, false);
 		}
 	}
 	public disable() {
@@ -22,7 +21,7 @@ class PropView extends ButtonView {
 		this.setActiveState(this._num, false);
 	}
 	public enable() {
-		if (this._num > 0 || this._num === -1) {
+		if (this._num > 0) {
 			super.enable();
 			this.setActiveState(this._num, true);
 		}

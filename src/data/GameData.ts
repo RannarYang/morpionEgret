@@ -1,7 +1,7 @@
 class GameData {
 	public static AI : string = "AI1";
 	public static undoNum : number = 0;
-	public static hintNum : number = 0;
+	public static tipsNum : number = 0;
 
 	public static chessBoard : number[][] = [];
 	public static wins : boolean[][][];
@@ -170,6 +170,9 @@ class GameData {
 	public static movePawnCommandsPush(command: Command) {
 		this.movePawnCommands.push(command);
 		this.updateObserver();
+	}
+	public static movePawnCommandsLen() {
+		return this.movePawnCommands.length;
 	}
 	public static addPawnObserver(observer) {
 		this._pawnObservers.push(observer);
