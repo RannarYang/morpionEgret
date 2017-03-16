@@ -1,27 +1,54 @@
 class ChessView extends egret.Sprite{
-	private myShape: egret.Shape;
+	private _myShapes: egret.Shape[];
+	private _tipShape: egret.Shape;
 	public constructor() {
 		super();
-		this.myShape = new egret.Shape();
-		this.addChild(this.myShape);
+		this.init();
+	}
+	public init() {
+		this.removeChildren();
+		this._myShapes = [];
+		this._tipShape = null;
 	}
 	public addChess(i, j, me) {
-		let myShape = this.myShape; 
+		this.removeTipChess();
+		let myShape = new egret.Shape();
 
 		var rx = 20 + i * 40;
 		var ry = 30 + 20 + j * 40;
 		//创建渐变填充  
 		
-
 		if (me) {
-			// myShape.graphics.beginGradientFill(egret.GradientType.RADIAL,[0x0A0A0A,0x636766],[1,1],[0,1]);//渐变按钮
 			myShape.graphics.beginFill(0x000000, 1);
 		} else {
-			// myShape.graphics.beginGradientFill(egret.GradientType.RADIAL,[0xD1D1D1,0xF9F9F9],[1,1],[0,1]);//渐变按钮
 			myShape.graphics.beginFill(0xffffff, 1);			
 		}
 		
 		myShape.graphics.drawCircle(rx,ry,15);
 		myShape.graphics.endFill();
+		this._myShapes.push(myShape);
+		this.addChild(myShape);
+	}
+	public removeChess() {
+		this.removeTipChess(); // 如果之前有提示，则删除提示功能
+		let myShape = this._myShapes.pop();
+		this.removeChild(myShape);
+	}
+	public addTipChess(i, j) {
+		if (!this._tipShape) {
+			let tipShape = this._tipShape = new egret.Shape();
+			var rx = 20 + i * 40;
+			var ry = 30 + 20 + j * 40;
+			tipShape.graphics.beginFill(0xff0000, 0.5);
+			tipShape.graphics.drawCircle(rx,ry,10);
+			tipShape.graphics.endFill();
+			this.addChild(tipShape);
+		}
+	}
+	public removeTipChess() {
+		if (this._tipShape) {
+			this.removeChild(this._tipShape);
+			this._tipShape = null;
+		}
 	}
 }

@@ -1,7 +1,4 @@
-class Command {
-	public constructor() {
-	}
-	public execute() {
-		
-	}
+interface Command {
+	execute();
+	undo();
 }

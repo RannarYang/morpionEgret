@@ -20,12 +20,21 @@ var ButtonView = (function (_super) {
         _this.init();
         return _this;
     }
+    ButtonView.prototype.disable = function () {
+        this._view.texture = RES.getRes(this._disableTexture);
+        this._view.touchEnabled = false;
+    };
+    ButtonView.prototype.enable = function () {
+        this._view.texture = RES.getRes(this._activeTexture);
+        this._view.touchEnabled = true;
+    };
     ButtonView.prototype.init = function () {
         this.createView();
     };
     ButtonView.prototype.createView = function () {
         this._view = new egret.Bitmap();
         this._view.texture = RES.getRes(this._activeTexture);
+        this._view.touchEnabled = true;
         this.addChild(this._view);
     };
     return ButtonView;

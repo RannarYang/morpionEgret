@@ -26,5 +26,9 @@
     "advanced" : {
         "activeTexture" : "advanced_png",
         "disableTexture" : "advanced_png"
+    },
+    "sure" : {
+        "activeTexture" : "sure_png",
+        "disableTexture" : "sure_png"
     }
 }

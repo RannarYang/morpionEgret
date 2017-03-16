@@ -1,0 +1,34 @@
+{
+    "undo" : {
+        "activeTexture" : "undo_png",
+        "disableTexture" : "undo_disabled_png"
+    },
+    "tips" : {
+        "activeTexture" : "tips_png",
+        "disableTexture" : "tips_disabled_png"
+    },
+    "replay" : {
+        "activeTexture" : "replay_png",
+        "disableTexture" : "replay_png"
+    },
+    "level" : {
+        "activeTexture" : "level_png",
+        "disableTexture" : "level_png"
+    },
+    "primary" : {
+        "activeTexture" : "primary_png",
+        "disableTexture" : "primary_png"
+    },
+    "middle" : {
+        "activeTexture" : "middle_png",
+        "disableTexture" : "middle_png"
+    },
+    "advanced" : {
+        "activeTexture" : "advanced_png",
+        "disableTexture" : "advanced_png"
+    },
+    "sure" : {
+        "activeTexture" : "sure_png",
+        "disableTexture" : "sure_png"
+    }
+}
