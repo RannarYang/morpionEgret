@@ -28,12 +28,12 @@ class GameEndView extends egret.EventDispatcher{
 		myShape.graphics.endFill();
 		// bg
 		myShape.graphics.beginFill(0xffffff, 1);
-		myShape.graphics.drawRoundRect(50, 240, 500, 300, 50, 50);
+		myShape.graphics.drawRoundRect(50, 200, 500, 300, 50, 50);
 		this._layer.addChild(myShape);
 		// texture
 		let resultBitMap = this._resultBitmap = new egret.Bitmap();
 		resultBitMap.x = 50;
-		resultBitMap.y = 270;
+		resultBitMap.y = 230;
 		this._layer.addChild(this._resultBitmap);
 
 		// btn
@@ -42,7 +42,7 @@ class GameEndView extends egret.EventDispatcher{
 	private initSureBtn() {
 		let sureBtn = new ButtonView('sure');
 		sureBtn.x = 240;
-		sureBtn.y = 450;
+		sureBtn.y = 410;
 		this._layer.addChild(sureBtn);
 		sureBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.tap_sure, this);
 	}

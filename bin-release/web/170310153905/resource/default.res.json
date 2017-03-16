@@ -1,0 +1,204 @@
+{
+	"groups": [
+		{
+			"keys": "background_png,levelConfig_json,undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,numberdisable_fnt,number_fnt,close_png,gameover_png,youwin_png,sure_png,num8_png,num9_png,num1_png,num2_png,num3_png,num4_png,num5_png,num6_png,num7_png,num4_disable_png,num5_disable_png,num6_disable_png,num7_disable_png,num8_disable_png,num9_disable_png,num1_disable_png,num2_disable_png,num3_disable_png",
+			"name": "game"
+		},
+		{
+			"keys": "undo_png,tips_png,replay_png,level_png,undo_disabled_png,tips_disabled_png,primary_png,middle_png,advanced_png,buttonConfig_json,close_png,sure_png,num0_png,num0_disable_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "background_png",
+			"type": "image",
+			"url": "assets/background.png"
+		},
+		{
+			"name": "levelConfig_json",
+			"type": "json",
+			"url": "res/levelConfig.json"
+		},
+		{
+			"name": "undo_png",
+			"type": "image",
+			"url": "assets/undo.png"
+		},
+		{
+			"name": "tips_png",
+			"type": "image",
+			"url": "assets/tips.png"
+		},
+		{
+			"name": "replay_png",
+			"type": "image",
+			"url": "assets/replay.png"
+		},
+		{
+			"name": "level_png",
+			"type": "image",
+			"url": "assets/level.png"
+		},
+		{
+			"name": "undo_disabled_png",
+			"type": "image",
+			"url": "assets/undo_disabled.png"
+		},
+		{
+			"name": "tips_disabled_png",
+			"type": "image",
+			"url": "assets/tips_disabled.png"
+		},
+		{
+			"name": "primary_png",
+			"type": "image",
+			"url": "assets/primary.png"
+		},
+		{
+			"name": "middle_png",
+			"type": "image",
+			"url": "assets/middle.png"
+		},
+		{
+			"name": "advanced_png",
+			"type": "image",
+			"url": "assets/advanced.png"
+		},
+		{
+			"name": "buttonConfig_json",
+			"type": "json",
+			"url": "res/buttonConfig.json"
+		},
+		{
+			"name": "numberdisable_fnt",
+			"type": "font",
+			"url": "assets/numberdisable.fnt"
+		},
+		{
+			"name": "number_fnt",
+			"type": "font",
+			"url": "assets/number.fnt"
+		},
+		{
+			"name": "close_png",
+			"type": "image",
+			"url": "assets/close.png"
+		},
+		{
+			"name": "gameover_png",
+			"type": "image",
+			"url": "assets/gameover.png"
+		},
+		{
+			"name": "youwin_png",
+			"type": "image",
+			"url": "assets/youwin.png"
+		},
+		{
+			"name": "sure_png",
+			"type": "image",
+			"url": "assets/sure.png"
+		},
+		{
+			"name": "num8_png",
+			"type": "image",
+			"url": "assets/num8.png"
+		},
+		{
+			"name": "num9_png",
+			"type": "image",
+			"url": "assets/num9.png"
+		},
+		{
+			"name": "num1_png",
+			"type": "image",
+			"url": "assets/num1.png"
+		},
+		{
+			"name": "num2_png",
+			"type": "image",
+			"url": "assets/num2.png"
+		},
+		{
+			"name": "num3_png",
+			"type": "image",
+			"url": "assets/num3.png"
+		},
+		{
+			"name": "num4_png",
+			"type": "image",
+			"url": "assets/num4.png"
+		},
+		{
+			"name": "num5_png",
+			"type": "image",
+			"url": "assets/num5.png"
+		},
+		{
+			"name": "num6_png",
+			"type": "image",
+			"url": "assets/num6.png"
+		},
+		{
+			"name": "num7_png",
+			"type": "image",
+			"url": "assets/num7.png"
+		},
+		{
+			"name": "num4_disable_png",
+			"type": "image",
+			"url": "assets/num4_disable.png"
+		},
+		{
+			"name": "num5_disable_png",
+			"type": "image",
+			"url": "assets/num5_disable.png"
+		},
+		{
+			"name": "num6_disable_png",
+			"type": "image",
+			"url": "assets/num6_disable.png"
+		},
+		{
+			"name": "num7_disable_png",
+			"type": "image",
+			"url": "assets/num7_disable.png"
+		},
+		{
+			"name": "num8_disable_png",
+			"type": "image",
+			"url": "assets/num8_disable.png"
+		},
+		{
+			"name": "num9_disable_png",
+			"type": "image",
+			"url": "assets/num9_disable.png"
+		},
+		{
+			"name": "num1_disable_png",
+			"type": "image",
+			"url": "assets/num1_disable.png"
+		},
+		{
+			"name": "num2_disable_png",
+			"type": "image",
+			"url": "assets/num2_disable.png"
+		},
+		{
+			"name": "num3_disable_png",
+			"type": "image",
+			"url": "assets/num3_disable.png"
+		},
+		{
+			"name": "num0_png",
+			"type": "image",
+			"url": "assets/num0.png"
+		},
+		{
+			"name": "num0_disable_png",
+			"type": "image",
+			"url": "assets/num0_disable.png"
+		}
+	]
+}
